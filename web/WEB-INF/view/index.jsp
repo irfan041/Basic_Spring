@@ -20,7 +20,7 @@
     <body>
         <img src="resource/banner.jpg" />
         
-        <h1 class="reding">Hello Dear</h1>
+        <h1 class="reding">Hello</h1>
                 
 
         <spring:url value="register/form1" var="loginUrl" />
