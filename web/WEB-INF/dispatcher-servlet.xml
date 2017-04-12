@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd        
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+      
+    <mvc:resources mapping="/resource/**" location="/static/"/>
+    <mvc:resources mapping="/style.css" location="/static/style.css"/>
+    <mvc:resources mapping="/suploads/**" location="/suploads/"/>
+    <!--    1. specify the controller component location -->
+    <context:component-scan base-package="com.Spring"/>
+      
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>   
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <!-- Turn off working out content type based on URL file extension, should fall back to looking at the Accept headers -->
+        <property name="favorPathExtension" value="false" />
+    </bean>   
+      
+      
+      
+
+    <!-- 2. HandlerMapping : Used default handler mapping internally -->
+      
+    <!-- 3. ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean> 
+    <!--Multi Part Resolver -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="102400" /> <!-- in Byte - up to 100 KB : 1024 * 100 = 102400 B -->
+ 
+    </bean>
+      
+</beans>
